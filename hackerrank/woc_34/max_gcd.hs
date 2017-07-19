@@ -1,4 +1,18 @@
-import Data.List
+import Data.Bits
+import Data.Word
+import Data.Maybe
+import Data.List hiding (maximumBy,foldl1')
+import Data.Char
+import Data.Ord
+import Data.Foldable hiding (sum)
+
+
+foldl1' f l = foldl' f (head l) (tail l)
+
+maximumBy' f = foldl1' max'
+  where max' x y = case f x y of
+                        LT -> y
+                        _  -> x
 
 pairs :: [a] -> [b] -> [(a,b)]
 pairs xs ys = [(x,y) | x <- xs, y <- ys]
@@ -18,7 +32,7 @@ addTuple :: (Integer, Integer) -> Integer
 addTuple (a,b) = a + b
 
 getMax :: String -> String -> Integer
-getMax as bs = addTuple $ maximumBy comparitor $ pairs xs ys
+getMax as bs = addTuple $ maximumBy' comparitor $ pairs xs ys
     where
         xs = map readInt $ words as
         ys = map readInt $ words bs
