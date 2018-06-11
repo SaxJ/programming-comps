@@ -38,7 +38,7 @@ groupToWords n = let
 
     left = n `mod` 100
     nTens = left `div` 10
-    tens = if nTens > 2 then join $ [(tensWords !! nTens), (smalls !! (left `mod` 10))] else smalls !! left
+    tens = if nTens >= 2 then join $ [(tensWords !! nTens), (smalls !! (left `mod` 10))] else smalls !! left
     in
         unwords $ if nHundreds > 0 then [hundreds, tens] else [tens]
 
