@@ -9,12 +9,16 @@ main = do
             lineToList line = [read x | x <- words line]
             test = do
                 nLines <- readLn
-                rawLines <- replicateM nLines getLine
-                print $ getMax nLines $ map lineToList rawLines
+                tree <- replicateM nLines parseTreeRow
+                print $ search tree 0
 
-neigh n = (n,n+1)
+parseTreeRow :: IO [Int]
+parseTreeRow = do
+    line <- getLine
+    return [read x | x <- words line]
 
-getMax :: Int -> [[Int]] -> Int
-getMax nLines xs = walk 0 0 0 xs
+search :: [[Int]] -> Int -> Int
+search [] _ = 0
+search (c:nxt) myIndex = max (myVal + search nxt myIndex) (myVal + search nxt (myIndex+1))
     where
-        walk total row col = walk (total + (xs !! row !! col)) 
+        myVal = c !! myIndex
