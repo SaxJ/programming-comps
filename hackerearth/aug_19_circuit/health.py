@@ -1,3 +1,9 @@
+import math
+
+divs = {}
+def divisors(n):
+    return [x for x in range(1, math.ceil(math.sqrt(n))) if n % x == 0]
+
 T = int(input())
 for t in range(T):
     print('=================')
@@ -5,15 +11,6 @@ for t in range(T):
     healths = [int(x) for x in input().split(' ')]
     damage = [int(x) for x in input().split(' ')]
 
-    days = [-1] * (nPeople)
-    for day in range(nDays):
-        mult = 1
-        while (day + 1) * mult <= nPeople:
-            person = ((day + 1) * mult) - 1
-            if healths[person] <= damage[day]:
-                if days[person] == -1:
-                    days[person] = day + 1
-            mult = mult + 1
+    deaths = []
+    for i, health in enumerate(healths):
 
-    for x in days:
-        print(x)
