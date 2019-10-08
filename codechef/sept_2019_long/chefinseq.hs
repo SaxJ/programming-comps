@@ -1,12 +1,8 @@
 import Control.Monad
+import Data.List
 
 subsequencesOfSize :: Int -> [a] -> [[a]]
-subsequencesOfSize n xs = let l = length xs
-                          in if n>l then [] else subsequencesBySize xs !! (l-n)
- where
-   subsequencesBySize [] = [[[]]]
-   subsequencesBySize (x:xs) = let next = subsequencesBySize xs
-                             in zipWith (++) ([]:next) (map (map (x:)) next ++ [[]])
+subsequencesOfSize n xs = filter ((== 2) . length) 
 
 calculate :: [Int] -> Int -> Int
 calculate nums k = foldr (\v c -> if v == mn then c + 1 else c) 0 sums
