@@ -79,12 +79,6 @@ def guess(first, last, ops, out):
 def possible(state):
     return [(op, applyOp(state, op)) for op in ['reversed', 'flipped', 'none', 'both']]
 
-#s = input()
-#print("flip: {}".format(applyOp(s, 'flipped')))
-#print("reverse: {}".format(applyOp(s, 'reversed')))
-#print("both: {}".format(applyOp(s, 'both')))
-#exit(0)
-
 T, B = [int(x) for x in input().split(' ')]
 for t in range(T):
     state = ''
